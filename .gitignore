@@ -5,9 +5,9 @@
 /[Bb]uilds/
 /Assets/AssetStoreTools*
 
-$PROJDIR/Temp/
-$PROJDIR/Library/
-$PROJDIR/Obj/
+Struggle/Temp/
+Struggle/Library/
+Struggle/Obj/
  
 *.DS_store
 
