@@ -7,6 +7,7 @@ public class cameraController : MonoBehaviour {
     public float sensitivity = 5.0F;
     public float smooth = 2.0F;
     public float clampLow = -45.0F, clampHigh = 60.0F;
+    public Light map_light;
     GameObject character;
 
 	// Use this for initialization
@@ -28,4 +29,19 @@ public class cameraController : MonoBehaviour {
         transform.localRotation = Quaternion.AngleAxis(-mouseMove.y, Vector3.right);
         character.transform.localRotation = Quaternion.AngleAxis(mouseMove.x, character.transform.up);
 	}
+
+    void OnPreCull () {
+        if (map_light != null)
+            map_light.enabled = false;
+    }
+     
+    void OnPreRender() {
+        if (map_light != null)
+            map_light.enabled = false;
+    }
+
+    void OnPostRender() {
+        if (map_light != null)
+            map_light.enabled = true;
+    }
 }
