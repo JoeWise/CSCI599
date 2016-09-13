@@ -17,7 +17,7 @@ public class MapUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             showMap = !showMap;
             mapCanvas.SetActive(showMap);

@@ -7,6 +7,7 @@ public class playerController : MonoBehaviour {
     public float backSpeed = 1.0F;
     public float straffeSpeed = 2.0F;
     public float sprintMultiplier = 3.0F;
+    public float jumpForce = 5.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -27,6 +28,12 @@ public class playerController : MonoBehaviour {
         {
             vertSpeed *= sprintMultiplier;
             horiSpeed *= sprintMultiplier;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("pressed space");
+            this.GetComponent<Rigidbody>().AddForce(new Vector3(0, jumpForce, 0), ForceMode.Force);
         }
 
         move *= vertSpeed * Time.deltaTime;

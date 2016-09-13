@@ -10422,6 +10422,7 @@ MonoBehaviour:
   backSpeed: 1
   straffeSpeed: 2
   sprintMultiplier: 3
+  jumpForce: 200
 --- !u!4 &1470915543 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000012419465974, guid: 19c11320e2748b74a9c17679f013a432,
