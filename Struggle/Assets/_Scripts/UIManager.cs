@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour {
 		} else {
 			PauseGame (false);
 		}
-		if(Input.GetKeyDown ("escape")) {
+		if(Input.GetButtonDown ("Pause")) {
 			TogglePause ();
 	
 		}

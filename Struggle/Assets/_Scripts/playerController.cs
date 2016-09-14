@@ -17,8 +17,8 @@ public class playerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float move = Input.GetAxis("Vertical");
-        float straffe = Input.GetAxis("Horizontal");
+        float move = Input.GetAxis("Vertical") + Input.GetAxis("Left Thumb Y");
+        float straffe = Input.GetAxis("Horizontal") + Input.GetAxis("Left Thumb X");
 
         float vertSpeed = forwSpeed;
         float horiSpeed = straffeSpeed;
@@ -30,9 +30,10 @@ public class playerController : MonoBehaviour {
             horiSpeed *= sprintMultiplier;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        // if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump"))
         {
-            Debug.Log("pressed space");
+            Debug.Log("pressed Jump");
             this.GetComponent<Rigidbody>().AddForce(new Vector3(0, jumpForce, 0), ForceMode.Force);
         }
 
