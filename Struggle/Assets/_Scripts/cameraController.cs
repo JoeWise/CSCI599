@@ -17,7 +17,7 @@ public class cameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        var deltaMouse = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
+        var deltaMouse = new Vector2(Input.GetAxisRaw("Mouse X") + Input.GetAxisRaw("Right Thumb X"), Input.GetAxisRaw("Mouse Y") + Input.GetAxisRaw("Right Thumb Y"));
 
         deltaMouse = Vector2.Scale(deltaMouse, new Vector2(sensitivity * smooth, sensitivity * smooth));
         smoothVector.x = Mathf.Lerp(smoothVector.x, deltaMouse.x, 1F / smooth);
