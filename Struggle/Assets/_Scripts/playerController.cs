@@ -3,51 +3,48 @@ using System.Collections;
 
 public class playerController : MonoBehaviour {
 
-    public float forwSpeed = 3.0F;
-    public float backSpeed = 1.0F;
-    public float straffeSpeed = 2.0F;
     public float sprintMultiplier = 3.0F;
     public float jumpForce = 5.0f;
+    public float speed = 3.0F;
+    public float rotateSpeed = 3.0F;
     // public Rigidbody rb;
+    CharacterController controller;
+    Vector3 moveDirection = Vector3.zero;
 
 	// Use this for initialization
 	void Start () {
         // Remove cursor, confine to game window
 		Cursor.lockState = CursorLockMode.Locked;
+        controller = GetComponent<CharacterController>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        float move = Input.GetAxis("Vertical") + Input.GetAxis("Left Thumb Y");
-        float straffe = Input.GetAxis("Horizontal") + Input.GetAxis("Left Thumb X");
+        // transform.Rotate(0, (Input.GetAxis("Horizontal")  + Input.GetAxis("Left Thumb X")) * rotateSpeed, 0);
+        // float curSpeed = speed * (Input.GetAxis("Vertical") + Input.GetAxis("Left Thumb Y"));
 
-        float vertSpeed = forwSpeed;
-        float horiSpeed = straffeSpeed;
-        if (move < 0) vertSpeed = backSpeed;
+        moveDirection.x = (Input.GetAxis("Horizontal")  + Input.GetAxis("Left Thumb X"));
+        moveDirection.z = (Input.GetAxis("Vertical")  + Input.GetAxis("Left Thumb Y"));
 
         if (Input.GetButton("Sprint"))
         {
-            vertSpeed *= sprintMultiplier;
-            horiSpeed *= sprintMultiplier;
+            moveDirection.x *= sprintMultiplier;
+            moveDirection.z *= sprintMultiplier;
         }
 
         // Debug.Log(rb.position.y);
         // if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
         // if (Input.GetButtonDown("Jump") && !(rb.velocity.y > 2) && !(rb.velocity.y < -2))
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && controller.isGrounded)
         {
-
             Debug.Log("pressed Jump");
-            this.GetComponent<Rigidbody>().AddForce(new Vector3(0, jumpForce, 0), ForceMode.Force);
+            // this.GetComponent<CharacterController>().AddForce(new Vector3(0, jumpForce, 0), ForceMode.Force);
+            moveDirection.y = jumpForce;
         }
 
-        move *= vertSpeed * Time.deltaTime;
-        straffe *= horiSpeed * Time.deltaTime;
-
-        //Debug.Log(Input.GetAxis("Vertical"), gameObject);
-
-        this.transform.Translate(straffe, 0, move);
-
-        
+        Vector3 forward = transform.TransformDirection(Vector3.forward);
+        // moveDirection += forward;
+        // controller.SimpleMove(forward * curSpeed);
+        controller.Move(moveDirection);
 	}
 }
