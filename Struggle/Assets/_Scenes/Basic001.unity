@@ -6258,7 +6258,7 @@ Light:
   m_Type: 2
   m_Color: {r: 0.86764705, g: 0.7826423, b: 0.42744377, a: 1}
   m_Intensity: 1
-  m_Range: 35.7
+  m_Range: 20
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -6288,7 +6288,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 575089586}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 1.6871427, y: -0.33200002, z: -2.9164286}
+  m_LocalPosition: {x: -0.43, y: 1.31, z: 0.78}
   m_LocalScale: {x: 0.7142858, y: 0.83233607, z: 0.88194966}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
   m_Children: []
@@ -15687,6 +15687,7 @@ MonoBehaviour:
   straffeSpeed: 2
   sprintMultiplier: 3
   jumpForce: 200
+  rb: {fileID: 1469000370}
 --- !u!1 &1470289291 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 1b624934770c7fa4eac0a8674a5df498, type: 3}

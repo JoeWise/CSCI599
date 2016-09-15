@@ -8,6 +8,7 @@ public class playerController : MonoBehaviour {
     public float straffeSpeed = 2.0F;
     public float sprintMultiplier = 3.0F;
     public float jumpForce = 5.0f;
+    // public Rigidbody rb;
 
 	// Use this for initialization
 	void Start () {
@@ -30,9 +31,12 @@ public class playerController : MonoBehaviour {
             horiSpeed *= sprintMultiplier;
         }
 
+        // Debug.Log(rb.position.y);
         // if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
+        // if (Input.GetButtonDown("Jump") && !(rb.velocity.y > 2) && !(rb.velocity.y < -2))
         if (Input.GetButtonDown("Jump"))
         {
+
             Debug.Log("pressed Jump");
             this.GetComponent<Rigidbody>().AddForce(new Vector3(0, jumpForce, 0), ForceMode.Force);
         }
