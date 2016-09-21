@@ -80,4 +80,6 @@ public class playerController : MonoBehaviour {
         // controller.Move(moveDirection * Time.deltaTime);
 
 	}
+
+
 }
