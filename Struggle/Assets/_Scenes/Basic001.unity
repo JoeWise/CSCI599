@@ -7558,10 +7558,10 @@ Light:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 725424044}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 7
   m_Type: 2
-  m_Color: {r: 0.50216264, g: 0.9485294, b: 0.54218173, a: 1}
+  m_Color: {r: 0.5019608, g: 0.5019608, b: 1, a: 1}
   m_Intensity: 8
   m_Range: 6
   m_SpotAngle: 30
@@ -11724,9 +11724,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 7
   m_Type: 2
-  m_Color: {r: 1, g: 1, b: 0.622, a: 1}
+  m_Color: {r: 0.3137255, g: 0.3137255, b: 0.3137255, a: 1}
   m_Intensity: 2.05
-  m_Range: 13
+  m_Range: 12
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -12416,10 +12416,10 @@ Light:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1154465200}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 7
   m_Type: 2
-  m_Color: {r: 0.50216264, g: 0.9485294, b: 0.54218173, a: 1}
+  m_Color: {r: 1, g: 0.5019608, b: 0.5019608, a: 1}
   m_Intensity: 8
   m_Range: 6
   m_SpotAngle: 30
@@ -16131,6 +16131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22b65c154c3d584494c6c341a091de9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lantern: {fileID: 1108676923}
 --- !u!1 &1470289291 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 1b624934770c7fa4eac0a8674a5df498, type: 3}
@@ -22672,10 +22673,10 @@ Light:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1886006062}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 7
   m_Type: 2
-  m_Color: {r: 0.50216264, g: 0.9485294, b: 0.54218173, a: 1}
+  m_Color: {r: 0.5019608, g: 1, b: 0.5019608, a: 1}
   m_Intensity: 8
   m_Range: 6
   m_SpotAngle: 30
