@@ -42,6 +42,7 @@ public class playerCollider : MonoBehaviour {
         }
 
         lanternLight.color += colorObject / 2;
-        lanternLight.range *= 1.2f;
+        lanternLight.range *= 1.1f;
+        lanternLight.intensity *= 1.1f;
     }
 }
