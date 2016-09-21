@@ -15577,8 +15577,8 @@ GameObject:
   - 33: {fileID: 1469000373}
   - 136: {fileID: 1469000372}
   - 23: {fileID: 1469000371}
-  - 54: {fileID: 1469000370}
-  - 114: {fileID: 1469000374}
+  - 143: {fileID: 1469000375}
+  - 114: {fileID: 1469000370}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -15602,22 +15602,30 @@ Transform:
   - {fileID: 575089588}
   m_Father: {fileID: 0}
   m_RootOrder: 3
---- !u!54 &1469000370
-Rigidbody:
+--- !u!114 &1469000370
+MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 54000013449307874, guid: 6bc50e8a7d5f57a43b87ce93a9fc29a9,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1469000368}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc6cd358e695e0e42b6756a218e26f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 6
+  runSpeed: 11
+  limitDiagonalSpeed: 0
+  toggleRun: 0
+  jumpSpeed: 8
+  gravity: 20
+  fallingDamageThreshold: 10
+  slideWhenOverSlopeLimit: 0
+  slideOnTaggedObjects: 0
+  slideSpeed: 12
+  airControl: 1
+  antiBumpFactor: 0.75
+  antiBunnyHopFactor: 1
 --- !u!23 &1469000371
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15670,24 +15678,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1469000368}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1469000374
-MonoBehaviour:
+--- !u!143 &1469000375
+CharacterController:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114000013091323672, guid: 6bc50e8a7d5f57a43b87ce93a9fc29a9,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1469000368}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cadb279491d656e499e4fe45dc1da59a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forwSpeed: 3
-  backSpeed: 1
-  straffeSpeed: 2
-  sprintMultiplier: 3
-  jumpForce: 200
-  rb: {fileID: 1469000370}
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1470289291 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 1b624934770c7fa4eac0a8674a5df498, type: 3}
