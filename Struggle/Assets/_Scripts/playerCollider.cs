@@ -4,7 +4,7 @@ using System.Collections;
 public class playerCollider : MonoBehaviour {
 
     public GameObject lantern;
-
+    public GameObject victoryText;
     private Light lanternLight = null;
 
 
@@ -27,6 +27,12 @@ public class playerCollider : MonoBehaviour {
             GameObject otherObject = other.transform.gameObject;
             updateLantern(otherObject);
             other.gameObject.SetActive(false);
+
+            if (GameObject.FindGameObjectsWithTag("PickUp").Length == 0)
+            {
+                Debug.Log("All lights collected");
+                victoryText.SetActive(true);
+            }
             // change lantern colour
         }
     }
