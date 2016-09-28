@@ -110,8 +110,8 @@ public class playerCollider : MonoBehaviour
             if (colorObject[i] < 0.8) colorObject[i] = 0; // Remove secondary colours
         }
 
-        lanternLight.color += colorObject / 2;
+        lanternLight.color += colorObject / 3;
         lanternLight.range *= 1.1f;
-        lanternLight.intensity *= 1.1f;
+        //lanternLight.intensity *= 1.1f;
     }
 }
