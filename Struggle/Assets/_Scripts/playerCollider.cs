@@ -17,8 +17,10 @@ public class playerCollider : MonoBehaviour
 	public float distWindEffect = 30f; // Distance for pickup wind effect
 	public float blowOutTime = 0.5f; // Time for pickup wind effect
 	public float blowBackTime = 5.0f; // Time for pickup wind effect cooldown
+	public GameObject ambient;
 
     private Light lanternLight = null;
+	private bool finished = false;
 
     // Use this for initialization
     void Start()
@@ -31,7 +33,7 @@ public class playerCollider : MonoBehaviour
 		foreach (GameObject pu in pickUps) {
 			pu.transform.parent.parent.GetComponent<AudioSource> ().playOnAwake = false;
 			pu.transform.parent.parent.GetComponent<AudioSource> ().clip = pickupClip;
-			Debug.Log ("Found audio source");
+			//Debug.Log ("Found audio source");
 		}
 
 
@@ -98,7 +100,7 @@ public class playerCollider : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PickUp"))
         {
-            Debug.Log("Collision Detected");
+            //Debug.Log("Collision Detected");
 
 			GameObject otherObject = other.transform.gameObject;
 
@@ -126,14 +128,16 @@ public class playerCollider : MonoBehaviour
 			foreach (Transform child in children) {
 				if (child.gameObject.CompareTag ("PickedUp")) {
 					child.gameObject.GetComponent<ParticleSystem>().enableEmission = true;
-					Debug.Log ("Found child");
+					//Debug.Log ("Found child");
 				}
 			}
 
-            if (GameObject.FindGameObjectsWithTag("PickUp").Length == 0)
+			//Debug.Log ("Pickups Left: " + GameObject.FindGameObjectsWithTag ("PickUp").Length);
+            if (GameObject.FindGameObjectsWithTag("PickUp").Length == 1)
             {
-                Debug.Log("All lights collected");
-                victoryText.SetActive(true);
+                //Debug.Log("All lights collected");
+				finished = true;
+                //victoryText.SetActive(true);
             }
             // change lantern colour
         }
@@ -145,7 +149,7 @@ public class playerCollider : MonoBehaviour
         Color colorObject = colorLight.color;
         for (int i = 0; i < 3; i++)
         {
-            Debug.Log("Colour: " + i + ": " + colorObject[i]);
+            //Debug.Log("Colour: " + i + ": " + colorObject[i]);
             if (colorObject[i] < 0.8) colorObject[i] = 0; // Remove secondary colours
         }
 
@@ -166,10 +170,19 @@ public class playerCollider : MonoBehaviour
 			yield return new WaitForSeconds (3.4f);
 			float startTime = Time.time;
 			Vector3 posA = pickup.transform.position;
-			Vector3 playerToCam = new Vector3 (0, 2.0f, 0); // Player =/= camera -> need to adjust
+			Vector3 playerToCam = new Vector3 (0, 4.0f, 0); // Player =/= camera -> need to adjust
 			while (Vector3.Distance(pickup.transform.position,transform.position-playerToCam) > 0.1f) {
 				pickup.transform.position = Vector3.Lerp (posA, transform.position-playerToCam, (Time.time - startTime)*speed);
 				yield return null;
+			}
+
+			// If game over
+			if (finished) {
+				victoryText.SetActive (true);
+				Light ambientLight = ambient.GetComponent<Light>();
+
+				ambientLight.intensity += 0.35f;
+				finished = !finished;
 			}
 			pickup.SetActive (false);
 		}
@@ -192,7 +205,7 @@ public class playerCollider : MonoBehaviour
 				distTriggerCarpetHair = max;
 				distTriggerCarpetHair = Mathf.Lerp (max, start, (Time.time - startTime - blowOutTime));
 			}
-			Debug.Log ("New step effect range: " + distTriggerCarpetHair);
+			//Debug.Log ("New step effect range: " + distTriggerCarpetHair);
 			yield return null;
 		}
 

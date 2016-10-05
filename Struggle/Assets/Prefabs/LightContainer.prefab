@@ -4449,7 +4449,7 @@ ParticleSystem:
           inSlope: 0
           outSlope: 0
           tangentMode: 0
-        - time: 0.3995902
+        - time: 1
           value: 0
           inSlope: -2
           outSlope: -2
