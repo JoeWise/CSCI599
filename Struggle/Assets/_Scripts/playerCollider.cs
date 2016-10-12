@@ -98,6 +98,16 @@ public class playerCollider : MonoBehaviour
     // Collect light source. Should probably not be here.
     void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("PickUpMini"))
+        {
+            GameObject otherObject = other.transform.gameObject;
+
+            other.isTrigger = false;
+            other.enabled = false;
+            otherObject.transform.GetComponent<AudioSource>().Play();
+            other.gameObject.SetActive(false);
+            //playPickupAnim(otherObject.transform.parent.gameObject);
+        }
         if (other.gameObject.CompareTag("PickUp"))
         {
             //Debug.Log("Collision Detected");
