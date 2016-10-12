@@ -14,7 +14,7 @@ public class playerCollider : MonoBehaviour
 	public Animation pickupAnim;
 	public float animationDelay = 3.3f; // Secs delay before lerping light towards player on pickup
 	public float speed = 2.5f; // Speed at which pickup moves to player
-	public float distWindEffect = 30f; // Distance for pickup wind effect
+	public float distWindEffect = 5f; // Distance for pickup wind effect
 	public float blowOutTime = 0.5f; // Time for pickup wind effect
 	public float blowBackTime = 5.0f; // Time for pickup wind effect cooldown
 	public GameObject ambient;
@@ -51,7 +51,7 @@ public class playerCollider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		Collider[] activeCarpetHairs = Physics.OverlapSphere (player.transform.position, distTriggerCarpetHair * 2);
+		Collider[] activeCarpetHairs = Physics.OverlapSphere (player.transform.position, distTriggerCarpetHair);
 		for (int i = 0; i < activeCarpetHairs.Length; i++)
         {
 			GameObject hair = activeCarpetHairs [i].gameObject;
@@ -69,7 +69,7 @@ public class playerCollider : MonoBehaviour
         }
 		if (animateLightPickupWind) {
 			animateLightPickupWind = false;
-			StartCoroutine (lightPickupWindEffect ());
+			//StartCoroutine (lightPickupWindEffect ()); // ADD FOR WIND EFFECT
 		}
     }
 
