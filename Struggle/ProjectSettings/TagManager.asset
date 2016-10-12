@@ -9,6 +9,10 @@ TagManager:
   - PickedUp
   - AmbientLight
   - Card
+  - Crosshair
+  - LightPickUpDust
+  - Beacon
+  - PickUpMini
   layers:
   - Default
   - TransparentFX
@@ -21,7 +25,7 @@ TagManager:
   - MapUI
   - World
   - Lantern
-  - 
+  - CarpetHairCollider
   - 
   - 
   - 

@@ -10,7 +10,7 @@ public class playerCollider : MonoBehaviour
     public GameObject[] carpetHair;
     public float distTriggerCarpetHair = 2.0f; // Distance to start carpet hair animation
     public float maxAngle = 80; // Max angle of carpet hair tilt
-	public AudioClip pickupClip;
+	//public AudioClip pickupClip;
 	public Animation pickupAnim;
 	public float animationDelay = 3.3f; // Secs delay before lerping light towards player on pickup
 	public float speed = 2.5f; // Speed at which pickup moves to player
@@ -21,6 +21,10 @@ public class playerCollider : MonoBehaviour
 	public static bool pickedUp = false;	//Is true if a light is picked up, false after pick up animation	
     private Light lanternLight = null;
 	private bool finished = false;
+	public AudioClip smallPickupAudio;
+	public static bool animateLightPickupWind = false;
+
+	public GameObject col;
 
     // Use this for initialization
     void Start()
@@ -29,19 +33,19 @@ public class playerCollider : MonoBehaviour
         carpetHair = GameObject.FindGameObjectsWithTag("CarpetHair");
 
 		// Set up audio for pickups
-		GameObject[] pickUps = GameObject.FindGameObjectsWithTag ("PickUp");
+		/*GameObject[] pickUps = GameObject.FindGameObjectsWithTag ("PickUp");
 		foreach (GameObject pu in pickUps) {
 			pu.transform.parent.parent.GetComponent<AudioSource> ().playOnAwake = false;
 			pu.transform.parent.parent.GetComponent<AudioSource> ().clip = pickupClip;
 			//Debug.Log ("Found audio source");
-		}
+		}*/
+	
 
-
-		// Disable "picked up" particle effect until collision activation
+		/*// Disable "picked up" particle effect until collision activation
 		GameObject[] pickedUpAnim = GameObject.FindGameObjectsWithTag ("PickedUp");
 		foreach (GameObject pu in pickedUpAnim) {
 			pu.GetComponent<ParticleSystem> ().enableEmission = false;
-		}
+		}*/
     }
 
     // Update is called once per frame
@@ -61,6 +65,10 @@ public class playerCollider : MonoBehaviour
                 else carpetHair[i].transform.eulerAngles = new Vector3(0, 0, 0);
             }
         }
+		if (animateLightPickupWind) {
+			animateLightPickupWind = false;
+			StartCoroutine (lightPickupWindEffect ());
+		}
     }
 
     // Animate carpet hairs
@@ -77,7 +85,7 @@ public class playerCollider : MonoBehaviour
         zRatio = (carpetHair.transform.position.z - transform.position.z) / distance * maxAngle;
 
         //Debug.Log("Distance: " + distance + "Magnitude: " + magnitude + " Ratios " + xRatio + " " + zRatio);
-        carpetHair/*[i]*/.transform.eulerAngles = new Vector3(zRatio * magnitude, -0.5f, -xRatio * magnitude);// carpetHairAngles[i];
+        carpetHair/*[i]*/.transform.eulerAngles = new Vector3(zRatio * magnitude, 0, -xRatio * magnitude);// carpetHairAngles[i];
 
     }
 
@@ -98,62 +106,63 @@ public class playerCollider : MonoBehaviour
     // Collect light source. Should probably not be here.
     void OnTriggerEnter(Collider other)
     {
-        /*if (other.gameObject.CompareTag("PickUpMini"))
+        if (other.gameObject.CompareTag("PickUpMini"))
         {
             GameObject otherObject = other.transform.gameObject;
-
-            other.isTrigger = false;
+			other.gameObject.GetComponent<AudioSource> ().Play ();
+			other.isTrigger = false;
             other.enabled = false;
-            otherObject.transform.GetComponent<AudioSource>().Play();
             other.gameObject.SetActive(false);
+
             //playPickupAnim(otherObject.transform.parent.gameObject);
-        }*/
-        if (other.gameObject.CompareTag("PickUp"))
-        {
+        }
+        //if (other.gameObject.CompareTag("PickUp"))
+        //{
             //Debug.Log("Collision Detected");
 
-			GameObject otherObject = other.transform.gameObject;
+			//GameObject otherObject = other.transform.gameObject;
 
 			// Remove trigger
-			other.isTrigger = false;
-			other.enabled = false;
-			pickedUp = true;
+			//other.isTrigger = false;
+			//other.enabled = false;
+			//pickedUp = true;
 			// Change player lantern accordingly
-            updateLantern(otherObject);
+            //updateLantern(otherObject);
 
 			// Play sound
-			otherObject.transform.parent.parent.GetComponent<AudioSource>().Play();
+			//otherObject.transform.parent.parent.GetComponent<AudioSource>().Play();
 			// climax at ~3.4 seconds
 
 			// Play animation
-			playPickupAnim(otherObject.transform.parent.gameObject);
+			//playPickupAnim(otherObject.transform.parent.gameObject);
 
 			// Disable lighe source and attached particle effects - REPLACE WITH ANIM
             //otherObject.SetActive(false);
 
 			// Enable particle effect for picked up space
 
-			GameObject par = otherObject.transform.parent.parent.gameObject;
+			/*GameObject par = otherObject.transform.parent.parent.gameObject;
 			Transform[] children = par.GetComponentsInChildren<Transform> ();
 			foreach (Transform child in children) {
 				if (child.gameObject.CompareTag ("PickedUp")) {
 					child.gameObject.GetComponent<ParticleSystem>().enableEmission = true;
 					//Debug.Log ("Found child");
 				}
-			}
+			}*/
 
 			//Debug.Log ("Pickups Left: " + GameObject.FindGameObjectsWithTag ("PickUp").Length);
-            if (GameObject.FindGameObjectsWithTag("PickUp").Length == 1)
-            {
+            //if (GameObject.FindGameObjectsWithTag("PickUp").Length == 1)
+            //{
                 //Debug.Log("All lights collected");
-				finished = true;
+				//finished = true;
+			//Debug.Log ("You win");
                 //victoryText.SetActive(true);
-            }
+            //}
             // change lantern colour
-        }
+        //}
 
     }
-
+	/*
     void updateLantern(GameObject otherObject)
     {
         Light colorLight = otherObject.GetComponent<Light>();
@@ -167,10 +176,10 @@ public class playerCollider : MonoBehaviour
         lanternLight.color += colorObject / 2;
         lanternLight.range *= 1.1f;
         //lanternLight.intensity *= 1.1f;
-    }
-
+    }*/
+	
 	void playPickupAnim(GameObject pickup) {
-		pickup.GetComponent<Animation>().Play ();
+//		pickup.GetComponent<Animation>().Play ();
 		//currentLight = pickup;
 		StartCoroutine(moveLightToPlayer (pickup));
 		StartCoroutine (lightPickupWindEffect ());
@@ -199,6 +208,7 @@ public class playerCollider : MonoBehaviour
 		}
 		pickedUp = false;
 	}
+
 
 	// Wind effect on surrounding carpet hairs
 	IEnumerator lightPickupWindEffect() {
