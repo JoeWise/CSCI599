@@ -20,7 +20,6 @@ public class LanternManager : MonoBehaviour {
 	// Private variables
 	private GameObject pickingUp;	// Current light picking up
 	private Light lanternLight = null;	// Light part of lantern
-	private bool finished = false;	// Is animation finished?
 
 	// Use this for initialization
 	void Start () {
