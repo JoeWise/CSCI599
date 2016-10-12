@@ -9,12 +9,12 @@ public class BasicEnemy : MonoBehaviour
         public float attack1Range = 1f;
         public int attack1Damage = 1;
         public float timeBetweenAttacks;
- 
+        public bool attacking = false;
  
         // Use this for initialization
         void Start()
         {
-           // player = GameObject.FindGameObjectWithTag ("Player");
+           player = GameObject.FindGameObjectWithTag ("Player");
            target = player.transform;
            Rest();
         }
@@ -22,7 +22,14 @@ public class BasicEnemy : MonoBehaviour
         // Update is called once per frame
         void Update()
         {
-             
+             if(attacking)
+             {
+                MoveToPlayer();
+             }
+             else
+             {
+                Rest();
+             }
         }
  
         public void MoveToPlayer()

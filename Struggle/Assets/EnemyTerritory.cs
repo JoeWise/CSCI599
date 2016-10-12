@@ -25,15 +25,15 @@ public class EnemyTerritory : MonoBehaviour
             // Debug.Log("EnemyTerritory update");
 
 
-            if (playerInTerritory == true)
-            {
-                basicenemy.MoveToPlayer();
-            }
+            // if (playerInTerritory == true)
+            // {
+            //     basicenemy.attacking = true;
+            // }
  
-            if (playerInTerritory == false)
-            {
-                basicenemy.Rest();
-            }
+            // if (playerInTerritory == false)
+            // {
+            //     basicenemy.attacking = false;
+            // }
         }
  
         void OnTriggerEnter(Collider other)
@@ -42,7 +42,7 @@ public class EnemyTerritory : MonoBehaviour
 
             if (other.gameObject == player)
             {
-                playerInTerritory = true;
+                basicenemy.attacking = true;
             }
         }
      
@@ -52,7 +52,7 @@ public class EnemyTerritory : MonoBehaviour
 
             if (other.gameObject == player) 
             {
-                playerInTerritory = false;
+                basicenemy.attacking = false;
             }
         }
 }
