@@ -36,7 +36,7 @@ public class BasicEnemy : MonoBehaviour
         {
             //rotate to look at player
             transform.LookAt(target.position);
-            transform.Rotate(new Vector3 (0, -90, 0), Space.Self);
+            transform.Rotate(new Vector3 (0, 0, 0), Space.Self);
          
             //move towards player
             if (Vector3.Distance(target.position, target.position) > attack1Range) 
