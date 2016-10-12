@@ -9,6 +9,7 @@ TagManager:
   - PickedUp
   - AmbientLight
   - Crosshair
+  - LightPickUpDust
   layers:
   - Default
   - TransparentFX

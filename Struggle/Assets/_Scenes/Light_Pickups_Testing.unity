@@ -161,8 +161,6 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 555856610}
-  - {fileID: 200934520}
-  - {fileID: 1186076242}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!1 &200577089
@@ -284,12 +282,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 200934519}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.00000023842, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.55, z: 0}
   m_LocalScale: {x: 12.371197, y: 12.371199, z: 12.371199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 156476439}
-  m_RootOrder: 1
+  m_Father: {fileID: 555856610}
+  m_RootOrder: 6
 --- !u!135 &200934521
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -319,9 +317,10 @@ GameObject:
   - 4: {fileID: 230360417}
   - 198: {fileID: 230360419}
   - 199: {fileID: 230360418}
+  - 111: {fileID: 230360420}
   m_Layer: 0
   m_Name: dust
-  m_TagString: Untagged
+  m_TagString: LightPickUpDust
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -779,7 +778,7 @@ ParticleSystem:
       minMaxState: 0
     randomizeRotationDirection: 0
     gravityModifier: 0
-    maxNumParticles: 30
+    maxNumParticles: 100
     size3D: 0
     rotation3D: 0
   ShapeModule:
@@ -2066,6 +2065,21 @@ ParticleSystem:
     subEmitterCollision1: {fileID: 0}
     subEmitterDeath: {fileID: 0}
     subEmitterDeath1: {fileID: 0}
+--- !u!111 &230360420
+Animation:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 230360416}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 5cfecb000e16acd45a93a71c1bb184ba, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 5cfecb000e16acd45a93a71c1bb184ba, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &367781482
 GameObject:
   m_ObjectHideFlags: 0
@@ -7615,6 +7629,8 @@ Transform:
   - {fileID: 1715099807}
   - {fileID: 1490555416}
   - {fileID: 702746426}
+  - {fileID: 200934520}
+  - {fileID: 1186076242}
   m_Father: {fileID: 156476439}
   m_RootOrder: 0
 --- !u!199 &555856611
@@ -15166,12 +15182,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1186076241}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.00000023841858, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.55, z: 0}
   m_LocalScale: {x: 12.371197, y: 12.371199, z: 12.371199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 156476439}
-  m_RootOrder: 2
+  m_Father: {fileID: 555856610}
+  m_RootOrder: 7
 --- !u!135 &1186076243
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -18980,7 +18996,7 @@ GameObject:
   - 4: {fileID: 1501847895}
   - 114: {fileID: 1501847894}
   m_Layer: 0
-  m_Name: light_pickup_manager
+  m_Name: lantern_manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18994,10 +19010,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1501847893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23aa6560caae1a24d89d22097470c794, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c86bc4d7196c054b83a548d90e06a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 1297426804}
+  pickupClip: {fileID: 0}
+  animationDelay: 3.3
+  speed: 2.5
   raycastRange: 5
   crosshairUI: {fileID: 602012651}
 --- !u!4 &1501847895
