@@ -24,7 +24,13 @@ public class LanternManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		// Set up audio for pickups
+		/*GameObject[] pickUps = GameObject.FindGameObjectsWithTag ("PickUp");
+		foreach (GameObject pu in pickUps) {
+			pu.transform.parent.parent.GetComponent<AudioSource> ().playOnAwake = false;
+			pu.transform.parent.parent.GetComponent<AudioSource> ().clip = pickupClip;
+			//Debug.Log ("Found audio source");
+		}*/
 	}
 	
 	// Update is called once per frame
@@ -47,23 +53,26 @@ public class LanternManager : MonoBehaviour {
 			if (Input.GetMouseButtonDown (0)) {
 			} // do the light stun thing
 		}
+		//pickingUpAudioTrigger = false;
 	}
 
 	void pickUpLight(GameObject light) {
-		Debug.Log ("Picking up the thing\n");
+		//Debug.Log ("Picking up the thing\n");
 		pickUpAnimation (light);
+		pickingUpAudioTrigger = true;
+		light.transform.parent.GetComponent<AudioSource>().Play();
 	}
 
 	void pickUpAnimation(GameObject light) {
 		// Find dust particles
 		Transform[] children = light.GetComponentsInChildren<Transform> ();
 		foreach (Transform child in children) {
-			Debug.Log ("There exists a child");
+			//Debug.Log ("There exists a child");
 			if (child.gameObject.CompareTag ("LightPickUpDust")) {
 				ParticleSystem par = child.gameObject.GetComponent<ParticleSystem> ();
 				par.GetComponent<Animation>().Play ();
 
-				Debug.Log ("Found child");
+				//Debug.Log ("Found child");
 			}
 		}
 

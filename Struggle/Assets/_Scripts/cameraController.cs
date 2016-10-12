@@ -8,6 +8,7 @@ public class cameraController : MonoBehaviour {
     public float smooth = 2.0F;
     public float clampLow = -45.0F, clampHigh = 60.0F;
     public Light map_light;
+	public GameObject lantern;
     GameObject character;
 
 	// Use this for initialization
@@ -27,7 +28,9 @@ public class cameraController : MonoBehaviour {
         mouseMove.y = Mathf.Clamp(mouseMove.y, clampLow, clampHigh);
 
         transform.localRotation = Quaternion.AngleAxis(-mouseMove.y, Vector3.right);
+		lantern.transform.localRotation = Quaternion.AngleAxis(-mouseMove.y, Vector3.right);
         character.transform.localRotation = Quaternion.AngleAxis(mouseMove.x, character.transform.up);
+
 	}
 
     void OnPreCull () {

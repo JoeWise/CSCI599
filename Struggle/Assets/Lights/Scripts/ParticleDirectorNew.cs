@@ -9,7 +9,7 @@ public class ParticleDirectorNew : MonoBehaviour {
 	public GameObject to;
 	public float speed = 3.0f;
 
-	private float decel = 0.97f; // need to decelerate particles to remove their initial velocity
+	private float decel = 0.96f; // need to decelerate particles to remove their initial velocity
 								// and accurately stream to target
 	private ParticleSystem.Particle[] particles;
 	private float sqrDistance;

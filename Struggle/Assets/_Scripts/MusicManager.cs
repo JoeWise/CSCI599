@@ -18,14 +18,14 @@ public class MusicManager : MonoBehaviour {
 	void Update() {
 
 		//Change if condition for event
-		if (playerCollider.pickedUp == true) {
+		if (LanternManager.pickingUpAudioTrigger) {
 			if (source.clip == main_theme) {
 				source.clip = light_variation;
 				source.loop = false;
 				source.Play ();
 
 			}
-
+			LanternManager.pickingUpAudioTrigger = false;
 		}
 		if((source.isPlaying == false) && (source.clip==light_variation)) {
 			source.clip = main_theme;
