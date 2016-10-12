@@ -18,7 +18,7 @@ public class playerCollider : MonoBehaviour
 	public float blowOutTime = 0.5f; // Time for pickup wind effect
 	public float blowBackTime = 5.0f; // Time for pickup wind effect cooldown
 	public GameObject ambient;
-
+	public static bool pickedUp = false;	//Is true if a light is picked up, false after pick up animation	
     private Light lanternLight = null;
 	private bool finished = false;
 
@@ -107,7 +107,7 @@ public class playerCollider : MonoBehaviour
 			// Remove trigger
 			other.isTrigger = false;
 			other.enabled = false;
-
+			pickedUp = true;
 			// Change player lantern accordingly
             updateLantern(otherObject);
 
@@ -141,6 +141,7 @@ public class playerCollider : MonoBehaviour
             }
             // change lantern colour
         }
+
     }
 
     void updateLantern(GameObject otherObject)
@@ -186,6 +187,7 @@ public class playerCollider : MonoBehaviour
 			}
 			pickup.SetActive (false);
 		}
+		pickedUp = false;
 	}
 
 	// Wind effect on surrounding carpet hairs
