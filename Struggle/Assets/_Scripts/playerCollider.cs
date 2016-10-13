@@ -14,7 +14,7 @@ public class playerCollider : MonoBehaviour
 	public Animation pickupAnim;
 	public float animationDelay = 3.3f; // Secs delay before lerping light towards player on pickup
 	public float speed = 2.5f; // Speed at which pickup moves to player
-	public float distWindEffect = 30f; // Distance for pickup wind effect
+	public float distWindEffect = 5f; // Distance for pickup wind effect
 	public float blowOutTime = 0.5f; // Time for pickup wind effect
 	public float blowBackTime = 5.0f; // Time for pickup wind effect cooldown
 	public GameObject ambient;
@@ -30,7 +30,7 @@ public class playerCollider : MonoBehaviour
     void Start()
     {
         lanternLight = lantern.GetComponent<Light>();
-        carpetHair = GameObject.FindGameObjectsWithTag("CarpetHair");
+        //carpetHair = GameObject.FindGameObjectsWithTag("CarpetHair");
 
 		// Set up audio for pickups
 		/*GameObject[] pickUps = GameObject.FindGameObjectsWithTag ("PickUp");
@@ -51,23 +51,25 @@ public class playerCollider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (carpetHair != null)
+		Collider[] activeCarpetHairs = Physics.OverlapSphere (player.transform.position, distTriggerCarpetHair);
+		for (int i = 0; i < activeCarpetHairs.Length; i++)
         {
-            for (int i = 0; i < carpetHair.Length; i++)
-            {
-                Vector3 distance = transform.position - carpetHair[i].transform.position;
-                distance.y = 0; // Only look on x,z
-                float distanceMag = distance.magnitude;
-                if (distanceMag < distTriggerCarpetHair)
-                {
-                    adjustCarpetHair(carpetHair[i], distanceMag);
-                }
-                else carpetHair[i].transform.eulerAngles = new Vector3(0, 0, 0);
-            }
+			GameObject hair = activeCarpetHairs [i].gameObject;
+			if(hair.transform.CompareTag("CarpetHair")) {
+				//Debug.Log ("Found");
+				Vector3 distance = transform.position - activeCarpetHairs[i].transform.position;
+	            distance.y = 0; // Only look on x,z
+	            float distanceMag = distance.magnitude;
+	            if (distanceMag < distTriggerCarpetHair)
+	            {
+					adjustCarpetHair(hair, distanceMag);
+	            }
+				else activeCarpetHairs[i].transform.eulerAngles = new Vector3(0, 0, 0);
+			}
         }
 		if (animateLightPickupWind) {
 			animateLightPickupWind = false;
-			StartCoroutine (lightPickupWindEffect ());
+			//StartCoroutine (lightPickupWindEffect ()); // ADD FOR WIND EFFECT
 		}
     }
 
