@@ -48,7 +48,9 @@ public class LanternManager : MonoBehaviour {
 
 					// Allow click
 					pickingUp = hit.transform.parent.gameObject;
-					if (Input.GetMouseButtonDown (0)) {
+					// if (Input.GetMouseButtonDown (0)) 
+					if (Input.GetButton("Interact"))
+					{
 						hit.collider.enabled = false;
 						pickUpLight (pickingUp);
 						playerCollider.animateLightPickupWind = true;
