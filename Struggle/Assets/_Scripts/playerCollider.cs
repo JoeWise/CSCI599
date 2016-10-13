@@ -23,6 +23,7 @@ public class playerCollider : MonoBehaviour
 	private bool finished = false;
 	public AudioClip smallPickupAudio;
 	public static bool animateLightPickupWind = false;
+	public GameObject lanternCentre;
 
 	public GameObject col;
 
@@ -69,7 +70,7 @@ public class playerCollider : MonoBehaviour
         }
 		if (animateLightPickupWind) {
 			animateLightPickupWind = false;
-			//StartCoroutine (lightPickupWindEffect ()); // ADD FOR WIND EFFECT
+			//StartCoroutine (lightPickupWindEffect ());
 		}
     }
 
@@ -111,12 +112,12 @@ public class playerCollider : MonoBehaviour
         if (other.gameObject.CompareTag("PickUpMini"))
         {
             GameObject otherObject = other.transform.gameObject;
-			other.gameObject.GetComponent<AudioSource> ().Play ();
+			other.gameObject.transform.parent.gameObject.GetComponent<AudioSource> ().Play ();
 			other.isTrigger = false;
             other.enabled = false;
-            other.gameObject.SetActive(false);
+            //other.gameObject.SetActive(false);
 
-            //playPickupAnim(otherObject.transform.parent.gameObject);
+            playPickupAnim(otherObject.transform.parent.gameObject);
         }
         //if (other.gameObject.CompareTag("PickUp"))
         //{
@@ -184,12 +185,12 @@ public class playerCollider : MonoBehaviour
 //		pickup.GetComponent<Animation>().Play ();
 		//currentLight = pickup;
 		StartCoroutine(moveLightToPlayer (pickup));
-		StartCoroutine (lightPickupWindEffect ());
+		//StartCoroutine (lightPickupWindEffect ());
 	}
 
 	IEnumerator moveLightToPlayer(GameObject pickup) {
 		if (pickup != null) {
-			yield return new WaitForSeconds (3.4f);
+			//yield return new WaitForSeconds (3.4f);
 			float startTime = Time.time;
 			Vector3 posA = pickup.transform.position;
 			Vector3 playerToCam = new Vector3 (0, 4.0f, 0); // Player =/= camera -> need to adjust
