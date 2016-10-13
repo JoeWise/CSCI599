@@ -59,7 +59,7 @@ public class LanternManager : MonoBehaviour {
 			} else {
 				crosshairUI.SetActive (false);
 				pickingUp = null;
-				if (Input.GetMouseButtonDown (0)) {
+				if (Input.GetButton("Interact")) {
 				} // do the light stun thing
 			}
 			//pickingUpAudioTrigger = false;
