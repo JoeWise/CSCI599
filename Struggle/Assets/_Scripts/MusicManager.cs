@@ -8,6 +8,7 @@ public class MusicManager : MonoBehaviour {
 
 	public AudioClip main_theme;
 	public AudioClip light_variation;
+
 	void Start() {
 		
 		source.clip = main_theme;
@@ -30,6 +31,8 @@ public class MusicManager : MonoBehaviour {
 			source.clip = main_theme;
 			source.Play ();
 		}
+
+
 			
 
 	}

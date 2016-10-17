@@ -7,7 +7,7 @@ public class MainMenuUIManager : MonoBehaviour {
 	public GameObject mainPanel;
 
 	void Start () {
-		
+		Cursor.visible = true;
 	}
 
 	// Update is called once per frame
@@ -23,6 +23,6 @@ public class MainMenuUIManager : MonoBehaviour {
 	}
 
 	public void startGame () {
-		Application.LoadLevel("WorldBuilding");
+		Application.LoadLevel("Lantern");
 	}
 }

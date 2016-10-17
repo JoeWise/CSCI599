@@ -11,7 +11,6 @@ public class playerCollider : MonoBehaviour
     public float distTriggerCarpetHair = 2.0f; // Distance to start carpet hair animation
     public float maxAngle = 80; // Max angle of carpet hair tilt
 	//public AudioClip pickupClip;
-	public Animation pickupAnim;
 	public float animationDelay = 3.3f; // Secs delay before lerping light towards player on pickup
 	public float speed = 2.5f; // Speed at which pickup moves to player
 	public float distWindEffect = 5f; // Distance for pickup wind effect
@@ -25,7 +24,6 @@ public class playerCollider : MonoBehaviour
 	public static bool animateLightPickupWind = false;
 	public GameObject lanternCentre;
 
-	public GameObject col;
 
     // Use this for initialization
     void Start()
@@ -70,7 +68,7 @@ public class playerCollider : MonoBehaviour
         }
 		if (animateLightPickupWind) {
 			animateLightPickupWind = false;
-			//StartCoroutine (lightPickupWindEffect ());
+			StartCoroutine (lightPickupWindEffect ());
 		}
     }
 
@@ -93,6 +91,7 @@ public class playerCollider : MonoBehaviour
     }
 
 	// Physics for collision (testing) - may be needed later but currently unused
+
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         Rigidbody body = hit.collider.attachedRigidbody;
@@ -105,6 +104,7 @@ public class playerCollider : MonoBehaviour
         Vector3 pushDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
         body.velocity = pushDir * pushPower;
     }
+
 
     // Collect light source. Should probably not be here.
     void OnTriggerEnter(Collider other)

@@ -6,8 +6,9 @@ public class LanternManager : MonoBehaviour {
 
 	// GameObjects
 	public Camera cam;
-	public ParticleSystem lanternCentre;
+	public GameObject lanternCentre;
 	public GameObject lantern;
+	public GameObject lanternAnimShell;
 
 	// Light pickups
 	public static bool pickingUpAudioTrigger = false; // Triggers music change in MusicManager
@@ -27,6 +28,8 @@ public class LanternManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		lanternLight = lantern.GetComponent<Light>();
+		//lanternAnimShell.GetComponent<Animation>().Play ();
+
 		// Set up audio for pickups
 		/*GameObject[] pickUps = GameObject.FindGameObjectsWithTag ("PickUp");
 		foreach (GameObject pu in pickUps) {
@@ -38,6 +41,7 @@ public class LanternManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
 		if (!isFinished) {
 			RaycastHit hit;
 
@@ -53,7 +57,7 @@ public class LanternManager : MonoBehaviour {
 					{
 						hit.collider.enabled = false;
 						pickUpLight (pickingUp);
-						playerCollider.animateLightPickupWind = true;
+						//playerCollider.animateLightPickupWind = true;
 					}
 				}
 			} else {
@@ -80,6 +84,10 @@ public class LanternManager : MonoBehaviour {
 		numCollected++;
 	}
 
+	void OnTriggerEnter(Collider other) {
+		Debug.Log ("\\o/");
+	}
+
 	void pickUpAnimation(GameObject light) {
 		light.GetComponent<Animation>().Play ();
 
@@ -104,9 +112,9 @@ public class LanternManager : MonoBehaviour {
 			if (toAdd[i] < 0.9) toAdd[i] = 0; // Remove secondary colours
 		}
 		Color toDecrease = new Color(0.0f, 0.0f, 0.0f);
-		lanternCentre.startColor -= toDecrease;
-		lanternCentre.startColor += toAdd / 3;
-		lanternLight.range *= 1.1f;
+		//lanternCentre.startColor -= toDecrease;
+		//lanternCentre.startColor += toAdd / 3;
+		//lanternLight.range *= 1.1f;
 		//lanternLight.intensity *= 1.1f;
 	}
 }
