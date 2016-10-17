@@ -9,6 +9,9 @@ public class LanternManager : MonoBehaviour {
 	public GameObject lanternCentre;
 	public GameObject lantern;
 	public GameObject lanternAnimShell;
+	public ParticleSystem lightBurst;
+	public ParticleSystem lightBurst2;
+	public GameObject burstParticleContainer;
 
 	// Light pickups
 	public static bool pickingUpAudioTrigger = false; // Triggers music change in MusicManager
@@ -18,10 +21,14 @@ public class LanternManager : MonoBehaviour {
 	public float raycastRange = 5;
 	public GameObject crosshairUI;
 
+	// Burst mechanic
+	public int numBurstParticles = 100; // Num particles for lantern burst
+
 	// Private variables
 	private GameObject pickingUp;	// Current light picking up
 	private Light lanternLight = null;	// Light part of lantern
 	private bool isFinished = false; // Is the game finished?
+	private float burstRate = 50.0f; // Emission rate for lantern burst
 
 	public static int numCollected = 0;
 
@@ -37,6 +44,8 @@ public class LanternManager : MonoBehaviour {
 			pu.transform.parent.parent.GetComponent<AudioSource> ().clip = pickupClip;
 			//Debug.Log ("Found audio source");
 		}*/
+
+		//lightBurst.emission.rate = 0.0;
 	}
 	
 	// Update is called once per frame
@@ -74,6 +83,32 @@ public class LanternManager : MonoBehaviour {
 				GameObject.FindGameObjectWithTag ("AmbientLight").GetComponent<Light> ().intensity = 0.9f;
 			}
 		}
+
+		if (Input.GetMouseButtonDown (0)) {
+			burstHandle ();
+		}
+	}
+
+	void burstHandle() {
+		burst ();
+		//Invoke("burst", 0.1f); // for more than 1 ring
+		//Invoke("burst", 0.2f);
+		burst2 ();
+	}
+
+	void burst() {
+		resetParticleRotation ();
+		lightBurst.Emit (numBurstParticles);
+
+	}
+
+	void burst2() {
+		resetParticleRotation ();
+		lightBurst2.Emit (1);
+	}
+
+	void resetParticleRotation() {
+		burstParticleContainer.transform.eulerAngles = new Vector3 (90.0f, 0.0f, 0.0f);
 	}
 
 	void pickUpLight(GameObject light) {
