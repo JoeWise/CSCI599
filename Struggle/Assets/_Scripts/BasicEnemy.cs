@@ -44,48 +44,17 @@ public class BasicEnemy : MonoBehaviour
         public void MoveToPlayer()
         {
             MoveToTarget(player_target.position);
-            // //rotate to look at player
-            // Look(player_target.position);
-            // // transform.Rotate(new Vector3 (0, 0, 0), Space.Self);
-         
-            // //move towards player
-            // Debug.Log(Vector3.Distance(targetPostition, this.transform.position));
-
-            // if (Vector3.Distance(targetPostition, this.transform.position) > attack1Range) 
-            // {
-            //     // Debug.Log("Moving towards player");
-            //     transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
-            //     resting = false;
-            // }
         }
 
         public void MoveToCenter()
         {
             MoveToTarget(center_target.position);
-
-            // //rotate to look at center
-            // Look(center.position);
-            // // transform.Rotate(new Vector3 (0, 0, 0), Space.Self);
-         
-            // //move towards center
-            // Debug.Log(Vector3.Distance(targetPostition, this.transform.position));
-            // if (Vector3.Distance(targetPostition, this.transform.position) > 1) 
-            // {
-            //     // Debug.Log("Moving towards center");
-            //     transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
-            //     resting = false;
-            // }
-            // else
-            // {
-            //     resting = true;
-            // }
         }
 
         public void MoveToTarget(Vector3 target)
         {
             //rotate to look at center
             Look(target);
-            // transform.Rotate(new Vector3 (0, 0, 0), Space.Self);
          
             //move towards center
             Vector3 targetPostition = new Vector3(target.x, this.transform.position.y, target.z);
@@ -101,7 +70,6 @@ public class BasicEnemy : MonoBehaviour
                 resting = true;
             }
         }
- 
  
         public void Look(Vector3 target)
         {
