@@ -94,6 +94,16 @@ public class playerCollider : MonoBehaviour
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        if (hit.gameObject.CompareTag("Top"))
+        {
+            hit.transform.SendMessage("StopSpinning", SendMessageOptions.DontRequireReceiver);
+        }
+        if (hit.gameObject.CompareTag("HouseOfCards"))
+        {
+            hit.gameObject.GetComponent<BoxCollider>().enabled = false;
+            hit.transform.SendMessage("FallDown", SendMessageOptions.DontRequireReceiver);
+        }
+
         Rigidbody body = hit.collider.attachedRigidbody;
         if (body == null || body.isKinematic)
             return;
@@ -119,6 +129,7 @@ public class playerCollider : MonoBehaviour
 
             playPickupAnim(otherObject.transform.parent.gameObject);
         }
+
         //if (other.gameObject.CompareTag("PickUp"))
         //{
             //Debug.Log("Collision Detected");
