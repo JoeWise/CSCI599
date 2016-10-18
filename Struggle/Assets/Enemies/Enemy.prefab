@@ -142,7 +142,7 @@ GameObject:
   - 65: {fileID: 65000012016375616}
   - 114: {fileID: 114000013529108390}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Territory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2641,6 +2641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 720411f12a4abce4591bdb7b3c0db472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  territory: {fileID: 0}
   speed: 3
   attack1Range: 1
   attack1Damage: 1
@@ -2657,6 +2658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 720411f12a4abce4591bdb7b3c0db472, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  territory: {fileID: 1000010386910888}
   speed: 3
   attack1Range: 1
   attack1Damage: 1
@@ -2673,6 +2675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 302ae72e3e1bbed4faca9b513aa8d32a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  territory: {fileID: 0}
   enemy: {fileID: 1000013302740452}
 --- !u!137 &137000011758823054
 SkinnedMeshRenderer:

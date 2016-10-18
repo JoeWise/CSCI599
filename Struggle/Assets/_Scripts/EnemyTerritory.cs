@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyTerritory : MonoBehaviour
 {
-        Collider territory;
+        public Collider territory;
         GameObject player;
         bool playerInTerritory;
  
@@ -14,7 +14,7 @@ public class EnemyTerritory : MonoBehaviour
         void Start()
         {
             player = GameObject.FindGameObjectWithTag("Player");
-            basicenemy = enemy.GetComponent <BasicEnemy> ();
+            basicenemy = enemy.GetComponent<BasicEnemy>();
             playerInTerritory = false;
             territory = gameObject.GetComponent(typeof(Collider)) as Collider;
         }
@@ -38,7 +38,7 @@ public class EnemyTerritory : MonoBehaviour
  
         void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Player entered territory");
+            // Debug.Log("Player entered territory");
 
             if (other.gameObject == player)
             {
@@ -48,7 +48,7 @@ public class EnemyTerritory : MonoBehaviour
      
         void OnTriggerExit(Collider other)
         {
-            Debug.Log("Player exited territory");
+            // Debug.Log("Player exited territory");
 
             if (other.gameObject == player) 
             {
