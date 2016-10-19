@@ -5,7 +5,7 @@ public class ParticleDirectorNew : MonoBehaviour {
 	// Attracts particles to player pos
 
 	public ParticleSystem from;
-	public float affectDistance = 13.0f;
+	public float affectDistance = 15.0f;
 	public GameObject to;
 	public float speed = 3.0f;
 

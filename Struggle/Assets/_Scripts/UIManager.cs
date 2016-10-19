@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour {
 	public GameObject pausePanel;
 	public bool isPaused;
 	public GameObject first_person_camera;
-
+	public 
 	// Use this for initialization
 	void Start () {
 		isPaused = false;
@@ -28,11 +28,11 @@ public class UIManager : MonoBehaviour {
 
 	void PauseGame (bool state) {
 		if (state) {
-			Cursor.lockState = CursorLockMode.None;
+			Cursor.visible = true;
 			Time.timeScale = 0.0f;
 		} 
 		else {
-			Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible = false;
 			Time.timeScale = 1.0f;
 		}
 		

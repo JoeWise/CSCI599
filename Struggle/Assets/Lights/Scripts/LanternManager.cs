@@ -6,8 +6,12 @@ public class LanternManager : MonoBehaviour {
 
 	// GameObjects
 	public Camera cam;
-	public ParticleSystem lanternCentre;
+	public GameObject lanternCentre;
 	public GameObject lantern;
+	public GameObject lanternAnimShell;
+	public ParticleSystem lightBurst;
+	public ParticleSystem lightBurst2;
+	public GameObject burstParticleContainer;
 
 	// Light pickups
 	public static bool pickingUpAudioTrigger = false; // Triggers music change in MusicManager
@@ -17,16 +21,22 @@ public class LanternManager : MonoBehaviour {
 	public float raycastRange = 5;
 	public GameObject crosshairUI;
 
+	// Burst mechanic
+	public int numBurstParticles = 100; // Num particles for lantern burst
+
 	// Private variables
 	private GameObject pickingUp;	// Current light picking up
 	private Light lanternLight = null;	// Light part of lantern
 	private bool isFinished = false; // Is the game finished?
+	private float burstRate = 50.0f; // Emission rate for lantern burst
 
 	public static int numCollected = 0;
 
 	// Use this for initialization
 	void Start () {
 		lanternLight = lantern.GetComponent<Light>();
+		//lanternAnimShell.GetComponent<Animation>().Play ();
+
 		// Set up audio for pickups
 		/*GameObject[] pickUps = GameObject.FindGameObjectsWithTag ("PickUp");
 		foreach (GameObject pu in pickUps) {
@@ -34,10 +44,13 @@ public class LanternManager : MonoBehaviour {
 			pu.transform.parent.parent.GetComponent<AudioSource> ().clip = pickupClip;
 			//Debug.Log ("Found audio source");
 		}*/
+
+		//lightBurst.emission.rate = 0.0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		
 		if (!isFinished) {
 			RaycastHit hit;
 
@@ -53,7 +66,7 @@ public class LanternManager : MonoBehaviour {
 					{
 						hit.collider.enabled = false;
 						pickUpLight (pickingUp);
-						playerCollider.animateLightPickupWind = true;
+						//playerCollider.animateLightPickupWind = true;
 					}
 				}
 			} else {
@@ -70,6 +83,32 @@ public class LanternManager : MonoBehaviour {
 				GameObject.FindGameObjectWithTag ("AmbientLight").GetComponent<Light> ().intensity = 0.9f;
 			}
 		}
+
+		if (Input.GetMouseButtonDown (0)) {
+			burstHandle ();
+		}
+	}
+
+	void burstHandle() {
+		burst ();
+		//Invoke("burst", 0.1f); // for more than 1 ring
+		//Invoke("burst", 0.2f);
+		burst2 ();
+	}
+
+	void burst() {
+		resetParticleRotation ();
+		lightBurst.Emit (numBurstParticles);
+
+	}
+
+	void burst2() {
+		resetParticleRotation ();
+		lightBurst2.Emit (1);
+	}
+
+	void resetParticleRotation() {
+		burstParticleContainer.transform.eulerAngles = new Vector3 (90.0f, 0.0f, 0.0f);
 	}
 
 	void pickUpLight(GameObject light) {
@@ -78,6 +117,10 @@ public class LanternManager : MonoBehaviour {
 		pickingUpAudioTrigger = true;
 		light.transform.parent.GetComponent<AudioSource>().Play();
 		numCollected++;
+	}
+
+	void OnTriggerEnter(Collider other) {
+		Debug.Log ("\\o/");
 	}
 
 	void pickUpAnimation(GameObject light) {
@@ -104,9 +147,9 @@ public class LanternManager : MonoBehaviour {
 			if (toAdd[i] < 0.9) toAdd[i] = 0; // Remove secondary colours
 		}
 		Color toDecrease = new Color(0.0f, 0.0f, 0.0f);
-		lanternCentre.startColor -= toDecrease;
-		lanternCentre.startColor += toAdd / 3;
-		lanternLight.range *= 1.1f;
+		//lanternCentre.startColor -= toDecrease;
+		//lanternCentre.startColor += toAdd / 3;
+		//lanternLight.range *= 1.1f;
 		//lanternLight.intensity *= 1.1f;
 	}
 }
