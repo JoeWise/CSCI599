@@ -25,8 +25,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private LerpControlledBob m_JumpBob = new LerpControlledBob();
         [SerializeField] private float m_StepInterval;
         [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
-        [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
-        [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+        [SerializeField] private AudioClip[] m_JumpSound;           // an array of sounds for when character leaves the ground.
+		[SerializeField] private AudioClip[] m_LandSound;           // an array of sounds for when character touches back on ground.
 
         private Camera m_Camera;
         private bool m_Jump;
@@ -87,7 +87,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void PlayLandingSound()
         {
-            m_AudioSource.clip = m_LandSound;
+			int n = Random.Range(1, m_LandSound.Length);
+			m_AudioSource.clip = m_LandSound[n];
             m_AudioSource.Play();
             m_NextStep = m_StepCycle + .5f;
         }
@@ -137,7 +138,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void PlayJumpSound()
         {
-            m_AudioSource.clip = m_JumpSound;
+			int n = Random.Range(1, m_JumpSound.Length);
+			m_AudioSource.clip = m_JumpSound[n];
             m_AudioSource.Play();
         }
 
